@@ -14,4 +14,12 @@ class SavingAccountTest extends FlatSpec with Matchers {
 
     withdrawalOperation._1.customerBalance shouldBe 1000.00
   }
+
+  it should "catch the error when withdraw an amount greater than available" in {
+    assertThrows[UnsupportedOperationException] {
+      val personalAccount = Customer("71960340", "10719603407", 1200.00, operationsAllowed = true)
+      val withdrawalAmount = 2000.00
+      SavingAccount.withdrawal(personalAccount, withdrawalAmount)
+    }
+  }
 }
